@@ -1,0 +1,10 @@
+{
+  "name": "json-schema",
+  "main": "index.js",
+  "dependencies": {
+    "ajv": "^8.5.0"
+  },
+  "scripts": {
+    "start": ""
+  }
+}
