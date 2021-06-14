@@ -46,15 +46,49 @@ console.log('1', /e?le?/.test('angel'));
 console.log('2', /e?le?/.test('angle'));
 console.log('3', /e?le?/.test('oslo'));
 console.log('4', /\d+/.test('123abc'));
-console.log('4', /\d+?/.test('123abc'));
+console.log('5', /\d+?/.test('123abc'));
 
 // "." : Matches any character except line break characters
 console.log('----Dot----');
 console.log('1', /.n/.test('nay'));
-console.log('1', /.n/.test('an'));
-console.log('1', /.n/.test('banana'));
+console.log('2', /.n/.test('an'));
+console.log('3', /.n/.test('banana'));
 
-// (x)
+// (x) : Capturing Parentheses
 console.log('----(x)----');
-console.log('1', /(foo) (bar) \1 \2/.test("foo bar foo bar"))
-console.log('1', /(foo) (bar) \1 \2/.test("foo bar foo"))
+console.log('1', /(foo) (bar) \1 \2/.test('foo bar foo bar'));
+console.log('2', /(foo) (bar) \1 \2/.test('foo bar foo'));
+
+// ??? need to figure out ???
+// (?:x) : Non-Capturing Parentheses
+console.log('----(?:x)----');
+console.log('1', 'foo'.match(/(foo)/));
+console.log('2', 'foo'.match(/foo/));
+
+// x(?=y) : matches x which is followed with y
+console.log('----x(?=y)----');
+const test = /Jack(?=Spark)/;
+console.log('1', 'JackSpark'.match(test));
+console.log('2', 'JackDpark'.match(test));
+console.log('3', 'JackFrost66'.match(/Jack(?=Sprat|Frost)/));
+
+// x(?!y) : matches x which isn't followed with y
+console.log('----x(?!y)----');
+console.log('1', /\d+(?!\.)/.exec('3.141'));
+
+// x|y : matches x or y
+console.log('----x|y----');
+console.log('1', /green|red/.exec('green apple'));
+console.log('2', /green|red/.exec('red apple'));
+
+// x{n} : matches x * n times ( n need to be positive int)
+console.log('----x{n}----');
+console.log('1', /a{2}/.exec('candy'));
+console.log('2', /a{2}/.exec('caandy'));
+console.log('3', /a{2}/.exec('caaandy'));
+
+// x{n,m} : matches x * n~m times
+console.log('----x{n,m}----');
+console.log('1', /a{1,3}/.exec('candy'));
+console.log('2', /a{1,3}/.exec('caaandy'));
+console.log('3', /a{1,3}/.exec('caaaaaaaandy'));
