@@ -140,6 +140,7 @@ console.log(/\W/.exec('$5.88'));
 // \n : n is positive int
 console.log('----\n----');
 console.log('1', /apple(,)\sorange\1/.exec('apple, orange, cherry, peach.'));
+const test2 = /apple(,)\sorange\1/.exec('apple, orange, cherry, peach.');
 
 // \xhh : 16進制
 // \ddd : 3個 8進制
@@ -151,3 +152,45 @@ console.log('1', /apple(,)\sorange\1/.exec('apple, orange, cherry, peach.'));
 // \t : U+0009 tab
 // \v : U+000B vertical tab
 // \0 : U+0000 NULL
+
+/** RegExp methods & String methods */
+const test3 = RegExp(/Chapter (\d+).\d*/);
+const test4 = RegExp(/Chapter (\d+).\d*/, 'g');
+const word = 'Chapter 3.4';
+// RegExp methods
+// exec() : null or array
+console.log(test3.exec(word));
+// test() : true or false
+console.log(test3.test(word));
+
+// String methods
+// match() : null or array
+console.log(word.match(test3));
+
+// search() : int, -1
+console.log(word.search(test3));
+console.log(word[word.search(test3)]);
+
+// str.replace(regexp|substr, newSubstr|function) : new string
+var str = 'Twas the night before Xmas...';
+var newstr = str.replace(/xmas/i, 'Christmas');
+console.log(newstr);
+
+var re = /apples/gi;
+var str = 'Apples are round, and apples are juicy.';
+var newstr = str.replace(re, 'oranges');
+console.log(newstr);
+
+var re = /(\w+)\s(\w+)/;
+var str = 'John Smith';
+var newstr = str.replace(re, '$2, $1');
+console.log(newstr);
+
+// need figure out
+function replacer(match, p1, p2, p3, offset, string) {
+    // p1 is nondigits, p2 digits, and p3 non-alphanumerics
+    console.log(match, p1, p2, p3, offset, string);
+    return [p1, p2, p3].join(' - ');
+}
+var newString = '@@abc1234'.replace(/([^\d]*)(\d*)([^\w]*)/, replacer);
+console.log(newString);
