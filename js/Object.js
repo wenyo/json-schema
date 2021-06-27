@@ -111,3 +111,24 @@ const vData5 = [
     },
 ];
 testFunc(vData5, schema5);
+
+console.log('Property name');
+
+const schema6 = {
+    type: 'object',
+    propertyNames: {
+        pattern: '^[A-Za-z_][A-Za-z0-9_]*$',
+    },
+};
+
+const vData6 = [{ _adhjkjhkj: 'value' }, { '0adhjkjhkj': 'value' }];
+testFunc(vData6, schema6);
+
+console.log('Size');
+const schema7 = {
+    type: 'object',
+    minProperties: 2,
+    maxProperties: 3,
+};
+const vData7 = [{}, { a: 0 }, { a: 0, b: 0 }, { a: 0, b: 0, c: 1, d: 5 }];
+testFunc(vData7, schema7);
